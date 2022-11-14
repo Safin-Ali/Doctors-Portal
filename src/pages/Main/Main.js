@@ -5,11 +5,13 @@ import Navbar from '../../components/Navbar/Navbar';
 
 const Main = () => {
     return (
-        <main>
+        <>
             <Navbar></Navbar>
-            <Outlet></Outlet>
+            <main className={`my-[10%]`}>
+                <Outlet></Outlet>
+            </main>
             <Footer></Footer>
-        </main>
+        </>
     );
 };
 
