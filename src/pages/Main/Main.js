@@ -4,7 +4,7 @@ import Navbar from '../../components/Navbar/Navbar';
 
 const Main = () => {
     return (
-        <main>
+        <main className={`pb-[5%]`}>
             <Navbar></Navbar>
             <Outlet></Outlet>
         </main>
