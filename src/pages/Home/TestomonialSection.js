@@ -37,7 +37,7 @@ const TestomonialSection = () => {
 
     }
     return (
-        <section style={backgroundImg} className={`md:container bg-[length:45px] mx-[5%] md:mx-auto`}>
+        <section style={backgroundImg} className={`lg:container bg-[length:45px] mb-[5%] lg:my-0 mx-[5%] lg:mx-auto`}>
             <div className={`mb-[10%]`}>
                 <h4 className={`text-[rgb(25,211,174)] text-xl font-bold`}>Testimonial</h4>
                 <h6 className={`text-xl md:text-3xl`}>What Our Patients Says</h6>
