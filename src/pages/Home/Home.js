@@ -7,6 +7,8 @@ import clock from '../../images/clock.svg';
 import marker from '../../images/marker.svg';
 import phone from '../../images/phone.svg';
 import ServicesSection from './ServicesSection';
+import AppointmentSection from './AppointmentSection';
+import TestomonialSection from './TestomonialSection';
 
 const Home = () => {
 
@@ -44,8 +46,8 @@ const Home = () => {
 
     return (
         <>
-            {/* Hero Area */}
             <section className={`mx-[5%] lg:container lg:mx-auto`}>
+            {/* Hero Area */}
                 <div style={bgImage}>
                     <div className={`flex py-[10%] flex-col lg:flex-row gap-y-[60px] gap-x-[30px] items-center h-full`}>
                             <div className={`order-2 lg:order-1`}>
@@ -71,6 +73,11 @@ const Home = () => {
                 {/* Our Services */}
                     <ServicesSection></ServicesSection>
             </section>
+            {/* Appontment */}
+            <AppointmentSection></AppointmentSection>
+
+            {/* Testomonial */}
+            <TestomonialSection></TestomonialSection>
         </>
     );
 };
