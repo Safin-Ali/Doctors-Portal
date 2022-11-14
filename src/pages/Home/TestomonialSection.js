@@ -29,8 +29,16 @@ const TestomonialSection = () => {
             location: 'California'
         },
     ]
+    const backgroundImg = {
+        backgroundImage: `url(${quoteImg})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'top right',
+        backgroundSize: '50px',
+
+
+    }
     return (
-        <section className={`container mx-auto`}>
+        <section style={backgroundImg} className={`container mx-auto`}>
             <div className={`mb-[10%]`}>
                 <h4 className={`text-[#19D3AE] text-xl font-bold `}>Testimonial</h4>
                 <h6 className={`text-3xl`}>What Our Patients Says</h6>

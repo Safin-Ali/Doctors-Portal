@@ -1,7 +1,6 @@
 import React from 'react';
 import CommonButton from '../../components/common-button/CommonButton';
 import bgImg from '../../images/appointment.png';
-import doctorImg from '../../images/doctor-small.png';
 
 const AppointmentSection = () => {
     const backgroundImg = {
