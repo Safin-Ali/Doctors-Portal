@@ -6,10 +6,7 @@ import InfoCard from '../../components/info-card/InfoCard';
 import clock from '../../images/clock.svg';
 import marker from '../../images/marker.svg';
 import phone from '../../images/phone.svg';
-import fluoride from '../../images/fluoride.png';
-import cavity from '../../images/cavity.png';
-import whitening from '../../images/whitening.png';
-import ServiceCard from '../../components/Service-Card/ServiceCard';
+import ServicesSection from './ServicesSection';
 
 const Home = () => {
 
@@ -45,28 +42,6 @@ const Home = () => {
         },
     ];
 
-    // Services Card
-    const servicesData = [
-        {
-            id: 1,
-            name: 'Fluoride Treatment',
-            description: 'Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the',
-            img: fluoride
-        },
-        {
-            id: 2,
-            name: 'Cavity Filling',
-            description: 'Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the',
-            img: cavity
-        },
-        {
-            id: 3,
-            name: 'Teeth Whitening',
-            description: 'Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the',
-            img: whitening
-        },
-    ];
-
     return (
         <>
             {/* Hero Area */}
@@ -94,15 +69,7 @@ const Home = () => {
                 </section>
 
                 {/* Our Services */}
-                <section>
-                    <h4 className={`text-[#19D3AE] text-xl font-bold text-center`}>Our Services</h4>
-                    <h6 className={`text-center text-3xl`}>Services We Provide</h6>
-                        <div className={`grid gap-y-[3%] grid-cols-1 lg:grid-cols-3 lg:gap-x-[3%] my-[3%]`}>
-                            {
-                            servicesData.map(elm => <ServiceCard key={elm.id} data={elm}></ServiceCard>)
-                            }
-                        </div>
-                </section>
+                    <ServicesSection></ServicesSection>
             </section>
         </>
     );
