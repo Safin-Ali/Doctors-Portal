@@ -6,6 +6,7 @@ import people3 from '../../images/people3.png';
 import TestomonialCard from '../../components/Testomonial/TestomonialCard';
 
 const TestomonialSection = () => {
+
     const reviewsData = [
         {
             _id: 1, 
@@ -33,19 +34,17 @@ const TestomonialSection = () => {
         backgroundImage: `url(${quoteImg})`,
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'top right',
-        backgroundSize: '50px',
-
 
     }
     return (
-        <section style={backgroundImg} className={`container mx-auto`}>
+        <section style={backgroundImg} className={`md:container bg-[length:45px] mx-[5%] md:mx-auto`}>
             <div className={`mb-[10%]`}>
-                <h4 className={`text-[#19D3AE] text-xl font-bold `}>Testimonial</h4>
-                <h6 className={`text-3xl`}>What Our Patients Says</h6>
+                <h4 className={`text-[rgb(25,211,174)] text-xl font-bold`}>Testimonial</h4>
+                <h6 className={`text-xl md:text-3xl`}>What Our Patients Says</h6>
             </div>
-        <section className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-center gap-x-[3%]`}>
+        <section className={`grid grid-cols-1 gap-y-[3%] md:gap-[3%] lg:gap-y-[0] md:grid-cols-2 lg:grid-cols-3 justify-center items-center gap-x-[3%]`}>
             {
-                reviewsData.map(elm => <TestomonialCard data={elm}></TestomonialCard>)
+                reviewsData.map(elm => <TestomonialCard key={elm._id} data={elm}></TestomonialCard>)
             }
         </section>
         </section>

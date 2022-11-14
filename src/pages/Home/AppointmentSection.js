@@ -3,6 +3,7 @@ import CommonButton from '../../components/common-button/CommonButton';
 import bgImg from '../../images/appointment.png';
 
 const AppointmentSection = () => {
+
     const backgroundImg = {
         backgroundImage: `url(${bgImg})`,
         backgroundRepeat: 'no-repeat',
