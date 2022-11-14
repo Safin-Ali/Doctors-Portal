@@ -1,5 +1,4 @@
 import React from 'react';
-import { MdOutlineWatchLater } from 'react-icons/md';
 
 const InfoCard = ({data}) => {
     const {name,description,icon} = data;
@@ -9,8 +8,8 @@ const InfoCard = ({data}) => {
                 <img src={icon} alt="Info Icon" />
             </div>
             <div>
-                <h4>{name}</h4>
-                <p>{description}</p>
+                <h4 className={`font-medium`}>{name}</h4>
+                <p className={`font-light`}>{description}</p>
             </div>
         </div>
     );

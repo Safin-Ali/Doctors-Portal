@@ -6,6 +6,10 @@ import InfoCard from '../../components/info-card/InfoCard';
 import clock from '../../images/clock.svg';
 import marker from '../../images/marker.svg';
 import phone from '../../images/phone.svg';
+import fluoride from '../../images/fluoride.png';
+import cavity from '../../images/cavity.png';
+import whitening from '../../images/whitening.png';
+import ServiceCard from '../../components/Service-Card/ServiceCard';
 
 const Home = () => {
 
@@ -39,7 +43,29 @@ const Home = () => {
             icon: phone,
             bgClass: 'bg-gradient-to-l bg-[#19D3AE] from-[#0FCFEC]'
         },
-    ]
+    ];
+
+    // Services Card
+    const servicesData = [
+        {
+            id: 1,
+            name: 'Fluoride Treatment',
+            description: 'Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the',
+            img: fluoride
+        },
+        {
+            id: 2,
+            name: 'Cavity Filling',
+            description: 'Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the',
+            img: cavity
+        },
+        {
+            id: 3,
+            name: 'Teeth Whitening',
+            description: 'Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the',
+            img: whitening
+        },
+    ];
 
     return (
         <>
@@ -61,11 +87,22 @@ const Home = () => {
                 </div>
 
             {/* Card Info */}
-                <div className={`grid grid-cols-1 gap-y-[5%] md:gap-[5%] md:grid-cols-2 lg:grid-cols-3 lg:gap-y-0 gap-x-[5%]`}>
+                <section className={`grid my-[10%] grid-cols-1 gap-y-[5%] md:gap-[5%] md:grid-cols-2 lg:grid-cols-3 lg:gap-y-0 gap-x-[5%]`}>
                     {
                         cardData.map(elm => <InfoCard key={elm.id} data={elm}></InfoCard>)
                     }
-                </div>
+                </section>
+
+                {/* Our Services */}
+                <section>
+                    <h4 className={`text-[#19D3AE] text-xl font-bold text-center`}>Our Services</h4>
+                    <h6 className={`text-center text-3xl`}>Services We Provide</h6>
+                        <div className={`grid gap-y-[3%] grid-cols-1 lg:grid-cols-3 lg:gap-x-[3%] my-[3%]`}>
+                            {
+                            servicesData.map(elm => <ServiceCard key={elm.id} data={elm}></ServiceCard>)
+                            }
+                        </div>
+                </section>
             </section>
         </>
     );
