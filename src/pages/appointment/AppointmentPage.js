@@ -1,7 +1,10 @@
-import React from 'react';
-import CommonButton from '../../components/common-button/CommonButton';
+import React, { useState } from 'react';
 import bgPoster from '../../images/bg.png';
 import Chair from '../../images/chair.png';
+import { format } from 'date-fns';
+import { DayPicker } from 'react-day-picker';
+import 'react-day-picker/dist/style.css';
+import './AppointmentPage.css';
 
 const AppointmentPage = () => {
     const bgImage = {
@@ -10,17 +13,22 @@ const AppointmentPage = () => {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
     }
+    const [selectedDate, setSelectedDate] = useState(new Date());
+
+    console.log(format(selectedDate,'PP'))
+
     return (
-        <section className={`mx-[5%] lg:container lg:mx-auto`}>
+        <>
+        <section className={`mx-[5%] mb-[5%] lg:container lg:mx-auto`}>
             {/* Hero Area */}
                 <div style={bgImage}>
                     <div className={`flex py-[10%] flex-col lg:flex-row gap-y-[60px] gap-x-[30px] items-center h-full`}>
-                            <div className={`order-2 lg:order-1`}>
-                                <h2 className={`text-2xl sm:text-4xl lg:text-5xl font-bold my-3 leading-[130%]`}>Your New Smile Starts <br /> Here</h2>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the</p>
-                                <div className={`mt-3`}>
-                                    <CommonButton text={'Get Started'}></CommonButton>
-                                </div>
+                            <div className={`order-2 basis-full lg:order-1`}>
+                                <DayPicker
+                                mode="single"
+                                selected={selectedDate}
+                                onSelect={setSelectedDate}
+                                />
                             </div>
                             <div className={`order-1 lg:order-2`}>
                                 <img src={Chair} alt="background Banner" />
@@ -28,6 +36,10 @@ const AppointmentPage = () => {
                     </div>
                 </div>
         </section>
+        <section>
+            <h4 className={`text-[#19D3AE] text-xl font-bold text-center`}>Available Appointments on April 30, 2022</h4>
+        </section>
+        </>
     );
 };
 

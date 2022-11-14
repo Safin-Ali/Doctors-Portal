@@ -20,7 +20,7 @@ const Navbar = () => {
                 </div>
 
                 {/* Nav Link */}
-                <div id={`nav-expand`} style={{height: `${toggle ? '300px' : '0px'}`,transition: `height 0.7s linear`}} className={`basis-full lg:basis-auto lg:flex overflow-hidden justify-center text-center`}>
+                <div id={`nav-expand`} style={{transition: `height 0.7s linear`}} className={`basis-full h-0 lg:h-fit lg:basis-auto ${toggle ? 'h-[300px]' : 'h-[0]'} lg:flex overflow-hidden justify-center text-center`}>
                     <Link className={`block border-b mx-2 lg:border-0 text-black p-1.5 rounded-md hover:bg-slate-800 duration-150 hover:text-[#D4D9E3]`} to={`/`}>Home</Link>
                     <Link className={`block border-b mx-2 lg:border-0 text-black p-1.5 rounded-md hover:bg-slate-800 duration-150 hover:text-[#D4D9E3]`} to={`/`}>About</Link>
                     <Link className={`block border-b mx-2 lg:border-0 text-black p-1.5 rounded-md hover:bg-slate-800 duration-150 hover:text-[#D4D9E3]`} to={`/appoinment`}>Appoinments</Link>
