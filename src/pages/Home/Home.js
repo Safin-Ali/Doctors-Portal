@@ -9,7 +9,6 @@ import phone from '../../images/phone.svg';
 import ServicesSection from './ServicesSection';
 import AppointmentSection from './AppointmentSection';
 import TestomonialSection from './TestomonialSection';
-import Footer from '../../components/footer/Footer';
 
 const Home = () => {
 
