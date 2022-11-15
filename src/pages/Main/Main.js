@@ -7,7 +7,7 @@ const Main = () => {
     return (
         <>
             <Navbar></Navbar>
-            <main className={`my-[10%]`}>
+            <main className={`my-[10%] relative`}>
                 <Outlet></Outlet>
             </main>
             <Footer></Footer>
