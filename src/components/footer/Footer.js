@@ -10,7 +10,7 @@ const Footer = () => {
 
     return (
         <footer style={bgImage} className={`py-10 bg-none bg-cover bg-center bg-no-repeat`}>
-            <section className={`md:container mx-[5%] justify-between flex flex-col lg:flex-row ,d:mx-auto`}>
+            <section className={`md:container mx-[5%] justify-between flex flex-col lg:flex-row md:mx-auto`}>
                 <div>
                     <h5 className={`text-[#939393] font-bold mb-4`}>Services</h5>
                     <Link to={`/`} className={`my-2 block`}>Emergency Checkup</Link>
