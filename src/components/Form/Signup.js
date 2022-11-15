@@ -1,30 +1,40 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Navbar from '../Navbar/Navbar';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
+import { AuthUser } from '../../context/AuthContext';
 
 const Signup = () => {
 
     const { register, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    const {createAcc} = useContext(AuthUser);
+
+    function handleSignup ({email,password}) {
+        createAcc(email,password)
+        .then( res => console.log('yay account created'))
+        .catch(e => {
+            console.log(e.message)
+        })
+    }
+
     return (
         <>
         <Navbar></Navbar>
         <section className={`flex justify-center flex-col items-center min-h-[calc(100vh-10vh)] max-h-full`}>
             <div className={`w-1/2 lg:w-2/6 mx-auto rounded-xl shadow-md bg-white px-10`}>
                 <h4 className={`text-3xl my-10 text-center`}>Login</h4>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(handleSignup)}>
                     <div className={`my-3`}>
                         <label className={`font-medium ml-2`}>Name</label>
-                        <input {...register("fullName")} className={`p-2 rounded-lg bg-transparent border block w-full`} />
+                        <input {...register("fullName")} type={'text'} className={`p-2 rounded-lg bg-transparent border block w-full`} />
                     </div>
                     <div className={`my-3`}>
                         <label className={`font-medium ml-2`}>Email</label>
-                        <input {...register("email")} className={`p-2 rounded-lg bg-transparent border block w-full`} />
+                        <input {...register("email")} type={'email'} className={`p-2 rounded-lg bg-transparent border block w-full`} />
                     </div>
                     <div className={`mt-3`}>
                         <label className={`font-medium ml-2`}>Password</label>
-                        <input {...register("password")} className={`p-2 rounded-lg bg-transparent border block w-full`} />
+                        <input {...register("password")} type={'password'} className={`p-2 rounded-lg bg-transparent border block w-full`} />
                     </div>
                     <div><Link className={`text-sm font-medium`} to={'/'}>Forgot Password ?</Link></div>
                     <div className={`my-3`}>
