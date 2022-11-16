@@ -5,6 +5,7 @@ import AppointmentPage from "../pages/appointment/AppointmentPage";
 import Dashboard from "../pages/dashboard/Dashboard";
 import Home from "../pages/Home/Home";
 import Main from "../pages/Main/Main";
+import PrivatePage from "../pages/private/PrivatePage";
 
 const router = createBrowserRouter([
     {path:'/', element: <Main></Main>,children:[
@@ -12,7 +13,7 @@ const router = createBrowserRouter([
         {path: '/appoinment', element: <AppointmentPage></AppointmentPage>},
         {path: '/login', element: <Login></Login>},
         {path: '/signup', element: <Signup></Signup>},
-        {path: '/dashboard', element: <Dashboard></Dashboard>},
+        {path: '/dashboard', element: <PrivatePage><Dashboard></Dashboard></PrivatePage>},
     ]},
 ])
 
