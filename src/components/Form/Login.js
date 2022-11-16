@@ -1,18 +1,21 @@
 import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
-import { Link, Navigate, useNavigate, } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate, } from 'react-router-dom';
 import { AuthUser } from '../../context/AuthContext';
 
 const Login = () => {
 
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state ? location.state : '/';
 
     const { register, handleSubmit } = useForm();
-    const {logIn,signUpWithGoogle,userData,setPath} = useContext(AuthUser);
+    const {logIn,signUpWithGoogle,userData} = useContext(AuthUser);
 
     function handleLogin ({email,password}) {
         logIn(email,password)
-        .then( res => console.log('yay! your are signin'))
+        .then( res => navigate(from))
         .catch(e => {
             console.log(e.message)
         })
@@ -21,14 +24,16 @@ const Login = () => {
     function handleGoogleLogin () {
         signUpWithGoogle()
         .then(res => {
-            navigate('/')
+            navigate(from)
         })
         .catch(e => {
             console.log(e.message)
         })
     }
 
-    if(userData?.email) return <Navigate to={`/`}></Navigate>
+    console.log(from)
+
+    if(userData?.email) return <Navigate to={from}></Navigate>
 
     return (
         <>
