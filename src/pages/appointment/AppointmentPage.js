@@ -8,6 +8,7 @@ import './AppointmentPage.css';
 import AppointmentCard from '../../components/appointment-card/AppointmentCard';
 import ModalForm from '../../components/Form/ModalForm';
 import Footer from '../../components/footer/Footer';
+import {useQuery} from '@tanstack/react-query'
 
 const AppointmentPage = () => {
     const bgImage = {
@@ -17,7 +18,6 @@ const AppointmentPage = () => {
         backgroundRepeat: 'no-repeat',
     }
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [appointmentData,setAppointmentData] = useState([]);
 
     // modal toggle function and state
     const [toggleModal,setToggleModal] = useState(false);
@@ -29,13 +29,13 @@ const AppointmentPage = () => {
         setToggleModal(!toggleModal);
     }
 
-    useEffect(()=>{
-        fetch(`appointmentsData.json`)
+    const {data: appointmentData,isLoading} = useQuery({
+        queryKey: ['appointmentData'],
+        queryFn: () => fetch(`http://localhost:5000/appointmentsData`)
         .then(res => res.json())
-        .then(data => setAppointmentData(data));
-    },[])
+    })
 
-    console.log()
+    console.log(appointmentData)
 
     return (
         <>
@@ -61,7 +61,7 @@ const AppointmentPage = () => {
                 <h4 className={`text-[#19D3AE] text-xl my-[5%] font-bold text-center`}>Available Appointments on {format(selectedDate,'PP')}</h4>
                 <div className={`grid grid-cols-1 text-center gap-y-[2%] md:grid-cols-2 md:gap-[10%] lg:grid-cols-3 `}>
                     {
-                        appointmentData.map(elm => <AppointmentCard setSelTIme={setSelTIme} handleModal={handleModal} key={elm._id} data={elm}></AppointmentCard>)
+                        appointmentData?.map(elm => <AppointmentCard setSelTIme={setSelTIme} handleModal={handleModal} key={elm._id} data={elm}></AppointmentCard>)
                     }
                 </div>
             </section>

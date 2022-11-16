@@ -31,8 +31,6 @@ const Login = () => {
         })
     }
 
-    console.log(from)
-
     if(userData?.email) return <Navigate to={from}></Navigate>
 
     return (
