@@ -7,11 +7,11 @@ const Main = () => {
     const currentLocation = useLocation();
 
     const {pathname} = currentLocation;
-    
+
     return (
         <>
             <Navbar></Navbar>
-            <main className={`${pathname === '/login' ? 'pt-0' : 'pt-[5%]'} relative`}>
+            <main className={`${pathname === '/login' || '/dashboard' ? 'pt-0' : 'pt-[5%]'} relative`}>
                 <Outlet></Outlet>
             </main>
         </>
