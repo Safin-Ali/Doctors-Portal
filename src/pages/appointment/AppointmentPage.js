@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import bgPoster from '../../images/bg.png';
 import Chair from '../../images/chair.png';
 import { format } from 'date-fns';
@@ -8,7 +8,8 @@ import './AppointmentPage.css';
 import AppointmentCard from '../../components/appointment-card/AppointmentCard';
 import ModalForm from '../../components/Form/ModalForm';
 import Footer from '../../components/footer/Footer';
-import {useQuery} from '@tanstack/react-query'
+import {useQuery} from '@tanstack/react-query';
+import axios from 'axios';
 
 const AppointmentPage = () => {
     const bgImage = {
@@ -24,18 +25,44 @@ const AppointmentPage = () => {
     const [modalDT,setModalDT] = useState();
     const [selTime,setSelTIme] = useState();
 
+    // get current trigged treatment date
+    const[treatment,setTreatment] = useState();
+
+    // submit treatment appointments
+    function handleSubmit (e) {
+        e.preventDefault();
+        const form = e.target;
+        const userName = form.fullName.value;
+        const appointmentsDate = format(selectedDate,'PP');
+        const treatmentName = treatment.name;
+        const slot = selTime;
+        const userEmail = form.email.value;
+        const userContactNumber = form.phoneNum.value || 'XXXXXXXXX';
+        const appoinmentObj = {userName,appointmentsDate,slot,userEmail,userContactNumber,treatmentName};
+
+        axios.post('http://localhost:5000/booked/appointments',appoinmentObj)
+        .then(res => {
+            if(res.status === 200){
+                form.reset()
+                handleModal()
+                console.log(res.data)
+            }
+        })
+    }
+
+    // handle modal function
     function handleModal () {
         setModalDT(format(selectedDate,'PP'));
         setToggleModal(!toggleModal);
+        toggleModal && setTreatment('')
     }
 
-    const {data: appointmentData,isLoading} = useQuery({
+    // fetching with caching function treatment services and appointsment
+    const {data: appointmentData} = useQuery({
         queryKey: ['appointmentData'],
         queryFn: () => fetch(`http://localhost:5000/appointmentsData`)
         .then(res => res.json())
     })
-
-    console.log(appointmentData)
 
     return (
         <>
@@ -61,12 +88,12 @@ const AppointmentPage = () => {
                 <h4 className={`text-[#19D3AE] text-xl my-[5%] font-bold text-center`}>Available Appointments on {format(selectedDate,'PP')}</h4>
                 <div className={`grid grid-cols-1 text-center gap-y-[2%] md:grid-cols-2 md:gap-[10%] lg:grid-cols-3 `}>
                     {
-                        appointmentData?.map(elm => <AppointmentCard setSelTIme={setSelTIme} handleModal={handleModal} key={elm._id} data={elm}></AppointmentCard>)
+                        appointmentData?.map(elm => <AppointmentCard setTreatment={setTreatment} setSelTIme={setSelTIme} handleModal={handleModal} key={elm._id} data={elm}></AppointmentCard>)
                     }
                 </div>
             </section>
             <Footer></Footer>
-            <ModalForm toggleModal={toggleModal} selectedDate={selectedDate} selTime={selTime} handleModal={handleModal} modalDT={modalDT}></ModalForm>
+            <ModalForm handleSubmit={handleSubmit} toggleModal={toggleModal} selectedDate={selectedDate} selTime={selTime} handleModal={handleModal} modalDT={modalDT}></ModalForm>
         </>
     );
 };

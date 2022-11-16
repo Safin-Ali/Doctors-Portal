@@ -1,6 +1,6 @@
 import React, { createRef } from 'react';
 
-const AppointmentCard = ({data,handleModal,setSelTIme}) => {
+const AppointmentCard = ({data,handleModal,setSelTIme,setTreatment}) => {
 
     const {name,slots} = data;
 
@@ -23,6 +23,7 @@ const AppointmentCard = ({data,handleModal,setSelTIme}) => {
             <button onClick={()=>{
                 setSelTIme(defTime.current.value)
                 handleModal()
+                setTreatment(data)
                 }} className={`bg-gradient-to-l text-white p-2 rounded-lg bg-[#19D3AE] from-[#0FCFEC] hover:shadow-md hover:bg-[#0FCFEC] hover:from-[#19D3AE] duration-150`}>BOOK APPOINMENT</button>
             </div>
         </div>
