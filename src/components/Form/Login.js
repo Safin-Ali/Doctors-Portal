@@ -1,13 +1,14 @@
 import React, { useContext } from 'react';
-import Navbar from '../Navbar/Navbar';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate, } from 'react-router-dom';
 import { AuthUser } from '../../context/AuthContext';
 
 const Login = () => {
 
+    const navigate = useNavigate();
+
     const { register, handleSubmit } = useForm();
-    const {logIn} = useContext(AuthUser);
+    const {logIn,signUpWithGoogle,userData,setPath} = useContext(AuthUser);
 
     function handleLogin ({email,password}) {
         logIn(email,password)
@@ -17,11 +18,21 @@ const Login = () => {
         })
     }
 
+    function handleGoogleLogin () {
+        signUpWithGoogle()
+        .then(res => {
+            navigate('/')
+        })
+        .catch(e => {
+            console.log(e.message)
+        })
+    }
+
+    if(userData?.email) return <Navigate to={`/`}></Navigate>
 
     return (
         <>
-        <Navbar></Navbar>
-        <section className={`flex justify-center flex-col items-center min-h-screen max-h-full`}>
+        <section className={`flex justify-center flex-col items-center min-h-[calc(100vh-10vh)] max-h-full`}>
             <div className={`w-1/2 lg:w-2/6 mx-auto rounded-xl shadow-md bg-white px-10`}>
                 <h4 className={`text-3xl my-10 text-center`}>Login</h4>
                 <form onSubmit={handleSubmit(handleLogin)}>
@@ -45,7 +56,7 @@ const Login = () => {
                     </div>
                 </form>
                 <div className={`text-center text-black pb-5`}>
-                    <button className={`p-3 rounded-xl border border-black w-full`}>CONTINUE WITH GOOGLE</button>
+                    <button onClick={handleGoogleLogin} className={`p-3 rounded-xl border border-black w-full`}>CONTINUE WITH GOOGLE</button>
                 </div>
             </div>
         </section>

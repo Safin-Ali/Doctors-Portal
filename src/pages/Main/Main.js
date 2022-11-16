@@ -1,16 +1,19 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
-import Footer from '../../components/footer/Footer';
+import { Outlet, useLocation,} from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 
 const Main = () => {
+
+    const currentLocation = useLocation();
+
+    const {pathname} = currentLocation;
+    
     return (
         <>
             <Navbar></Navbar>
-            <main className={`my-[10%] relative`}>
+            <main className={`${pathname === '/login' ? 'pt-0' : 'pt-[5%]'} relative`}>
                 <Outlet></Outlet>
             </main>
-            <Footer></Footer>
         </>
     );
 };

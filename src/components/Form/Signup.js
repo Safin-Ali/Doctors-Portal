@@ -1,13 +1,15 @@
 import React, { useContext } from 'react';
 import Navbar from '../Navbar/Navbar';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthUser } from '../../context/AuthContext';
 
 const Signup = () => {
 
+    const navigate = useNavigate();
+
     const { register, handleSubmit } = useForm();
-    const {createAcc} = useContext(AuthUser);
+    const {createAcc,signUpWithGoogle} = useContext(AuthUser);
 
     function handleSignup ({email,password}) {
         createAcc(email,password)
@@ -17,9 +19,18 @@ const Signup = () => {
         })
     }
 
+    function handleGoogleLogin () {
+        signUpWithGoogle()
+        .then(res => {
+            navigate('/')
+        })
+        .catch(e => {
+            console.log(e.message)
+        })
+    }
+
     return (
         <>
-        <Navbar></Navbar>
         <section className={`flex justify-center flex-col items-center min-h-[calc(100vh-10vh)] max-h-full`}>
             <div className={`w-1/2 lg:w-2/6 mx-auto rounded-xl shadow-md bg-white px-10`}>
                 <h4 className={`text-3xl my-10 text-center`}>Login</h4>
@@ -48,7 +59,7 @@ const Signup = () => {
                     </div>
                 </form>
                 <div className={`text-center text-black pb-5`}>
-                    <button className={`p-3 rounded-xl border border-black w-full`}>CONTINUE WITH GOOGLE</button>
+                    <button onClick={handleGoogleLogin} className={`p-3 rounded-xl border border-black w-full`}>CONTINUE WITH GOOGLE</button>
                 </div>
             </div>
         </section>

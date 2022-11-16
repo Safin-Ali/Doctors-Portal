@@ -7,6 +7,7 @@ import 'react-day-picker/dist/style.css';
 import './AppointmentPage.css';
 import AppointmentCard from '../../components/appointment-card/AppointmentCard';
 import ModalForm from '../../components/Form/ModalForm';
+import Footer from '../../components/footer/Footer';
 
 const AppointmentPage = () => {
     const bgImage = {
@@ -38,7 +39,6 @@ const AppointmentPage = () => {
 
     return (
         <>
-        <div className={`mb-[55%] lg:mb-[10%]`}>
             <section className={`mx-[5%] mb-[5%] lg:container lg:mx-auto`}>
                 {/* Hero Area */}
                     <div style={bgImage}>
@@ -57,7 +57,7 @@ const AppointmentPage = () => {
                     </div>
             </section>
 
-            <section className={`mx-[5%] lg:container lg:mx-auto`}>
+            <section className={`mx-[5%] lg:container my-[5%] lg:mx-auto`}>
                 <h4 className={`text-[#19D3AE] text-xl my-[5%] font-bold text-center`}>Available Appointments on {format(selectedDate,'PP')}</h4>
                 <div className={`grid grid-cols-1 text-center gap-y-[2%] md:grid-cols-2 md:gap-[10%] lg:grid-cols-3 `}>
                     {
@@ -65,7 +65,7 @@ const AppointmentPage = () => {
                     }
                 </div>
             </section>
-        </div>
+            <Footer></Footer>
             <ModalForm toggleModal={toggleModal} selectedDate={selectedDate} selTime={selTime} handleModal={handleModal} modalDT={modalDT}></ModalForm>
         </>
     );
