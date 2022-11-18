@@ -34,18 +34,19 @@ const AppointmentPage = () => {
         const form = e.target;
         const userName = form.fullName.value;
         const appointmentsDate = format(selectedDate,'PP');
-        const treatmentName = treatment.name;
+        const name = treatment.name;
         const slot = selTime;
         const userEmail = form.email.value;
         const userContactNumber = form.phoneNum.value || 'XXXXXXXXX';
-        const appoinmentObj = {userName,appointmentsDate,slot,userEmail,userContactNumber,treatmentName};
+        const appoinmentObj = {userName,appointmentsDate,slot,userEmail,userContactNumber,name};
 
-        axios.post('http://localhost:5000/booked/appointments',appoinmentObj)
+        axios.post('http://localhost:5000/booked/appointmentsData',appoinmentObj)
         .then(res => {
             if(res.status === 200){
                 form.reset()
                 handleModal()
                 console.log(res.data)
+                refetch()
             }
         })
     }
@@ -58,9 +59,9 @@ const AppointmentPage = () => {
     }
 
     // fetching with caching function treatment services and appointsment
-    const {data: appointmentData} = useQuery({
+    const {data: appointmentData,refetch} = useQuery({
         queryKey: ['appointmentData'],
-        queryFn: () => fetch(`http://localhost:5000/appointmentsData`)
+        queryFn: () => fetch(`http://localhost:5000/appointmentsData?date=${format(selectedDate,'PP')}`)
         .then(res => res.json())
     })
 
