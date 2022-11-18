@@ -2,16 +2,19 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import Dashtable from '../../components/dashboard-table/Dashtable';
 import { AuthUser } from '../../context/AuthContext';
+import axios from 'axios';
 
 const Dashboard = () => {
 
     const {userData} = useContext(AuthUser);
 
+    const getJWTToken = localStorage.getItem('jwt-encrypt-key');
+
     const {data:apntedAppliedData = []} = useQuery({
         queryKey: ['apntedAppliedData',userData?.email],
         queryFn: async () =>{
-            const res = await fetch(`http://localhost:5000/dashboard?email=${userData?.email}`);
-            const data = res.json();
+            const res = await axios.get(`http://localhost:5000/dashboard?email=${userData?.email}`,{headers: {authorization: `Bearer ${getJWTToken}`}});
+            const data = await res.data;
             return data;
         }
     })

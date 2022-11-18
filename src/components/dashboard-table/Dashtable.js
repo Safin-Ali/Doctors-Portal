@@ -5,8 +5,6 @@ const Dashtable = ({data}) => {
 
     const currentDate = new Date();
 
-    console.log(data)
-
     return (
     <>     
         <div className={`flex justify-between items-center m-4`}>

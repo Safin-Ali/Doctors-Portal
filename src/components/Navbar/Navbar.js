@@ -11,7 +11,9 @@ const Navbar = () => {
 
     function handleLogout () {
         logOut()
-        .then(()=>{})
+        .then(()=>{
+            localStorage.removeItem('jwt-encrypt-key');
+        })
         .catch(e => {
             console.log(e.message)
         })

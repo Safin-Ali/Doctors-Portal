@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { Link, Navigate, useLocation, useNavigate, } from 'react-router-dom';
 import { AuthUser } from '../../context/AuthContext';
+import axios from 'axios';
 
 const Login = () => {
 
@@ -13,9 +14,18 @@ const Login = () => {
     const { register, handleSubmit } = useForm();
     const {logIn,signUpWithGoogle,userData} = useContext(AuthUser);
 
+    function sendJWTToken (email) {
+        axios.post(`http://localhost:5000/jwt`,{},{headers: {email: email}})
+        .then(res => localStorage.setItem('jwt-encrypt-key',res.data))
+
+    }
+
     function handleLogin ({email,password}) {
         logIn(email,password)
-        .then( res => navigate(from))
+        .then( res => {
+            sendJWTToken(email)
+            navigate(from)
+        })
         .catch(e => {
             console.log(e.message)
         })
