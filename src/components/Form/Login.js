@@ -1,29 +1,26 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link, Navigate, useLocation, useNavigate, } from 'react-router-dom';
 import { AuthUser } from '../../context/AuthContext';
-import axios from 'axios';
+import useTokenVerify from '../../hook/useTokenVerify';
 
 const Login = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
+    const [enteredEmail,setEntiredEmail] = useState(null);
 
     const from = location.state ? location.state : '/';
+
+    const token = useTokenVerify(enteredEmail);
 
     const { register, handleSubmit } = useForm();
     const {logIn,signUpWithGoogle,userData} = useContext(AuthUser);
 
-    function sendJWTToken (email) {
-        axios.post(`http://localhost:5000/jwt`,{},{headers: {email: email}})
-        .then(res => localStorage.setItem('jwt-encrypt-key',res.data))
-
-    }
-
     function handleLogin ({email,password}) {
         logIn(email,password)
         .then( res => {
-            sendJWTToken(email)
+            setEntiredEmail(email)
             navigate(from)
         })
         .catch(e => {

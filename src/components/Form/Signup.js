@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
-import Navbar from '../Navbar/Navbar';
+import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthUser } from '../../context/AuthContext';
+import axios from 'axios';
+import useTokenVerify from '../../hook/useTokenVerify';
 
 const Signup = () => {
 
@@ -10,10 +11,18 @@ const Signup = () => {
 
     const { register, handleSubmit } = useForm();
     const {createAcc,signUpWithGoogle} = useContext(AuthUser);
+    const [enteredEmail,setEntiredEmail] = useState(null);
 
-    function handleSignup ({email,password}) {
+    const token = useTokenVerify(enteredEmail);
+
+    function handleSignup ({email,password,fullName}) {
         createAcc(email,password)
-        .then( res => console.log('yay account created'))
+        .then( res => {
+            alert('yay account created')
+            setEntiredEmail(email)
+            axios.post('http://localhost:5000/users',{email,fullName})
+            .then(res => console.log(res.data))
+        })
         .catch(e => {
             console.log(e.message)
         })
@@ -31,9 +40,9 @@ const Signup = () => {
 
     return (
         <>
-        <section className={`flex justify-center flex-col items-center min-h-[calc(100vh-10vh)] max-h-full`}>
+        <section className={`flex justify-center flex-col items-center mt-[3%]`}>
             <div className={`w-1/2 lg:w-2/6 mx-auto rounded-xl shadow-md bg-white px-10`}>
-                <h4 className={`text-3xl my-10 text-center`}>Login</h4>
+                <h4 className={`text-3xl my-10 text-center`}>Create Account</h4>
                 <form onSubmit={handleSubmit(handleSignup)}>
                     <div className={`my-3`}>
                         <label className={`font-medium ml-2`}>Name</label>
