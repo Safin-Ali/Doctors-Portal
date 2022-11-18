@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import bgPoster from '../../images/bg.png';
 import Chair from '../../images/chair.png';
 import { format } from 'date-fns';
@@ -10,6 +10,7 @@ import ModalForm from '../../components/Form/ModalForm';
 import Footer from '../../components/footer/Footer';
 import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
+import { AuthUser } from '../../context/AuthContext';
 
 const AppointmentPage = () => {
     const bgImage = {
@@ -18,6 +19,9 @@ const AppointmentPage = () => {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
     }
+
+    const {userData} = useContext(AuthUser);
+
     const [selectedDate, setSelectedDate] = useState(new Date());
 
     // modal toggle function and state
@@ -40,13 +44,17 @@ const AppointmentPage = () => {
         const userContactNumber = form.phoneNum.value || 'XXXXXXXXX';
         const appoinmentObj = {userName,appointmentsDate,slot,userEmail,userContactNumber,name};
 
-        axios.post('http://localhost:5000/booked/appointmentsData',appoinmentObj)
+        axios.post(`http://localhost:5000/booked/appointmentsData/?email=${userData?.email || ''}&date=${format(selectedDate,'PP')}`,appoinmentObj)
         .then(res => {
-            if(res.status === 200){
-                form.reset()
-                handleModal()
-                console.log(res.data)
-                refetch()
+            const {data} = res;
+            if(data.acknowledge){
+                form.reset();
+                handleModal();
+                console.log(res.data);
+                return refetch();
+            }
+            else if(!data.acknowledge){
+                return alert(data.message)
             }
         })
     }
@@ -64,6 +72,10 @@ const AppointmentPage = () => {
         queryFn: () => fetch(`http://localhost:5000/appointmentsData?date=${format(selectedDate,'PP')}`)
         .then(res => res.json())
     })
+
+    useEffect(()=>{
+        refetch()
+    },[selectedDate])
 
     return (
         <>

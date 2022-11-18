@@ -1,9 +1,11 @@
 import { format } from 'date-fns';
 import React from 'react';
 
-const Dashtable = () => {
+const Dashtable = ({data}) => {
 
-    const currentDate = new Date()
+    const currentDate = new Date();
+
+    console.log(data)
 
     return (
     <>     
@@ -32,20 +34,24 @@ const Dashtable = () => {
                     </tr>
                 </thead>
                 <tbody className={`text-zinc-800`}>
-                    <tr className={`bg-[#fffdfd] even:bg-[#f3f8fe] border-b`}>
-                    <td className={`p-3 pl-4`}>
-                            1
-                        </td>
-                        <th scope="row" className={`py-4 px-6 font-medium text-gray-900 whitespace-nowrap`}>
-                            SA Safin Ali
-                        </th>
-                        <td className={`py-4 px-6`}>
-                            Servicesssss
-                        </td>
-                        <td className={`py-4 px-6`}>
-                            {10}
-                        </td>
-                    </tr>                    
+                    {
+                        data.map((elm,idx) => {
+                            return <tr key={elm._id} className={`bg-[#fffdfd] even:bg-[#f3f8fe] border-b`}>
+                            <td className={`p-3 pl-4`}>
+                                    {idx+1}
+                                </td>
+                                <th scope="row" className={`py-4 px-6 font-medium text-gray-900 whitespace-nowrap`}>
+                                    {elm.userName}
+                                </th>
+                                <td className={`py-4 px-6`}>
+                                    {elm.name}
+                                </td>
+                                <td className={`py-4 px-6`}>
+                                    {elm.slot}
+                                </td>
+                            </tr>     
+                        })
+                    }               
                 </tbody>
             </table>
         </div>
