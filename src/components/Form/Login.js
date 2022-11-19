@@ -2,17 +2,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link, Navigate, useLocation, useNavigate, } from 'react-router-dom';
 import { AuthUser } from '../../context/AuthContext';
-import useTokenVerify from '../../hook/useTokenVerify';
+import TokenVerify from '../../hook/TokenVerify';
 
 const Login = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const [enteredEmail,setEntiredEmail] = useState(null);
 
     const from = location.state ? location.state : '/';
-
-    const token = useTokenVerify(enteredEmail);
 
     const { register, handleSubmit } = useForm();
     const {logIn,signUpWithGoogle,userData} = useContext(AuthUser);
@@ -20,7 +17,7 @@ const Login = () => {
     function handleLogin ({email,password}) {
         logIn(email,password)
         .then( res => {
-            setEntiredEmail(email)
+            TokenVerify(email)
             navigate(from)
         })
         .catch(e => {

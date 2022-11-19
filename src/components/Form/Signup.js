@@ -1,9 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext} from 'react';
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthUser } from '../../context/AuthContext';
 import axios from 'axios';
-import useTokenVerify from '../../hook/useTokenVerify';
 
 const Signup = () => {
 
@@ -11,17 +10,14 @@ const Signup = () => {
 
     const { register, handleSubmit } = useForm();
     const {createAcc,signUpWithGoogle} = useContext(AuthUser);
-    const [enteredEmail,setEntiredEmail] = useState(null);
-
-    const token = useTokenVerify(enteredEmail);
 
     function handleSignup ({email,password,fullName}) {
         createAcc(email,password)
         .then( res => {
             alert('yay account created')
-            setEntiredEmail(email)
             axios.post('http://localhost:5000/users',{email,fullName})
             .then(res => console.log(res.data))
+            navigate('/login')
         })
         .catch(e => {
             console.log(e.message)
