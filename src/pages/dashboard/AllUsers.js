@@ -1,39 +1,32 @@
-import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import Dashtable from '../../components/dashboard-table/Dashtable';
-import { AuthUser } from '../../context/AuthContext';
-import axios from 'axios';
-import useFetch from '../../hook/useFetch';
-import { Link } from 'react-router-dom';
-import AlluserTable from '../../components/dashboard-table/AlluserTable';
+import SideNav from '../../components/side-nav/SideNav';
+import { BsArrowRightCircle } from 'react-icons/bs';
+import '../../components/side-nav/side-nav.css';
+import { useLoaderData } from 'react-router-dom';
+
 
 const AllUsers = () => {
 
-    const {userData} = useContext(AuthUser);
+    // side nav toggle
+    const[toggleSideNav,setDriSNav] = useState(false);
 
-    const getJWTToken = localStorage.getItem('jwt-encrypt-key');
-
-    const data = useFetch('GET',`http://localhost:5000/users`)
-
-    const {data:allusersDT = []} = useQuery({
-        queryKey: ['apntedAppliedData',userData?.email],
-        queryFn: async () =>{
-            const res = await axios.get(`http://localhost:5000/users`,);
-            const data = await res.data;
-            return data;
-        }
-    })
+    const apntedAppliedData = useLoaderData();
 
     return (
-        <section className={`grid grid-cols-1 sm:grid-cols-4 lg:container gap-x-[3%] mx-auto`}>
-            <div className={`hidden sm:block min-h-screen border bg-white`}>
-                <p className={`text-center`}>Appointment</p>
-                <Link to={'/users'} className={`text-center my-10 ${data?.userStatus === 'admin' ? 'block' : 'hidden'}`}>All Users</Link>
+        <>
+            <section className={`grid hide-scrollbar overflow-y-scroll md:overflow-auto md:grid-cols-5 gap-x-[3%]`}>
+                <div className={`col-span-1`}>
+                    <SideNav setDriSNav={setDriSNav} toggleSideNav={toggleSideNav}></SideNav>
+                </div>
+                <div className={`col-span-4 ${toggleSideNav ? 'ml-[140px]' : 'ml-0'} p-5`}>
+                    <Dashtable data={apntedAppliedData}></Dashtable>
+                </div>
+            </section>
+            <div className={`fixed top-1/2 left-[1%] ${toggleSideNav ? 'hidden' : 'block'} transform -translate-y-1/2 md:hidden`}>
+                <BsArrowRightCircle onClick={()=>setDriSNav(!toggleSideNav)} className={`text-2xl`}></BsArrowRightCircle>
             </div>
-            <div className={`col-span-3 p-5`}>
-                <AlluserTable data={allusersDT}></AlluserTable>
-            </div>
-        </section>
+        </>
     );
 };
 

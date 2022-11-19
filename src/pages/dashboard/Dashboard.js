@@ -1,8 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Dashtable from '../../components/dashboard-table/Dashtable';
-import { AuthUser } from '../../context/AuthContext';
-import axios from 'axios';
 import SideNav from '../../components/side-nav/SideNav';
 import { BsArrowRightCircle } from 'react-icons/bs';
 import '../../components/side-nav/side-nav.css';
@@ -10,10 +7,6 @@ import { useLoaderData } from 'react-router-dom';
 
 
 const Dashboard = () => {
-
-    const {userData} = useContext(AuthUser);
-
-    const getJWTToken = localStorage.getItem('jwt-encrypt-key');
 
     // side nav toggle
     const[toggleSideNav,setDriSNav] = useState(false);
@@ -27,10 +20,12 @@ const Dashboard = () => {
                     <SideNav setDriSNav={setDriSNav} toggleSideNav={toggleSideNav}></SideNav>
                 </div>
                 <div className={`col-span-4 ${toggleSideNav ? 'ml-[140px]' : 'ml-0'} p-5`}>
-                    <Dashtable data={apntedAppliedData}></Dashtable>
+                    {
+                        apntedAppliedData ? <Dashtable data={apntedAppliedData}></Dashtable> : <p>nothing</p>
+                    }
                 </div>
             </section>
-            <div className={`fixed top-1/2  left-[1%] ${toggleSideNav ? 'hidden' : 'block'} transform -translate-y-1/2 md:hidden`}>
+            <div className={`fixed top-1/2 left-[1%] ${toggleSideNav ? 'hidden' : 'block'} transform -translate-y-1/2 md:hidden`}>
                 <BsArrowRightCircle onClick={()=>setDriSNav(!toggleSideNav)} className={`text-2xl`}></BsArrowRightCircle>
             </div>
         </>
