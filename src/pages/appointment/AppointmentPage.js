@@ -99,7 +99,7 @@ const AppointmentPage = () => {
 
             <section className={`mx-[5%] lg:container my-[5%] lg:mx-auto`}>
                 <h4 className={`text-[#19D3AE] text-xl my-[5%] font-bold text-center`}>Available Appointments on {format(selectedDate,'PP')}</h4>
-                <div className={`grid grid-cols-1 text-center gap-y-[2%] md:grid-cols-2 md:gap-[10%] lg:grid-cols-3 `}>
+                <div className={`grid grid-cols-1 text-center gap-x-[2%] md:grid-cols-2 md:gap-x-[10%] lg:grid-cols-3 `}>
                     {
                         appointmentData?.map(elm => <AppointmentCard setTreatment={setTreatment} setSelTIme={setSelTIme} handleModal={handleModal} key={elm._id} data={elm}></AppointmentCard>)
                     }

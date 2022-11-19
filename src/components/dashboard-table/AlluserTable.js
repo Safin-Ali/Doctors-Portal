@@ -1,15 +1,17 @@
 import { format } from 'date-fns';
 import React from 'react';
 
-const Dashtable = ({data}) => {
+const AlluserTable = ({data}) => {
+
+    console.log(data)
 
     const currentDate = new Date();
 
     return (
     <>     
-        <div className={`flex flex-col md:flex-row justify-between items-center m-4`}>
-            <h1 className={`text-2xl order-2 my-1 md:order-none`}>My Appointment</h1>
-            <div className={`border border-black order-1 p-3 rounded-lg my-1 md:order-none`}>
+        <div className={`flex justify-between items-center m-4`}>
+            <h1 className={`text-2xl`}>My Appointment</h1>
+            <div className={`border border-black p-3 rounded-lg`}>
                 <p>{format(currentDate,'PP')}</p>
             </div>
         </div>     
@@ -24,10 +26,10 @@ const Dashtable = ({data}) => {
                             Name
                         </th>
                         <th scope="col" className={`py-3 px-6`}>
-                            Service
+                            Email
                         </th>
                         <th scope="col" className={`py-3 px-6`}>
-                            Time
+                            Status
                         </th>
                     </tr>
                 </thead>
@@ -38,15 +40,15 @@ const Dashtable = ({data}) => {
                             <td className={`p-3 pl-4`}>
                                     {idx+1}
                                 </td>
+                                <td className={`p-3 pl-4`}>
+                                    {elm.fullName}
+                                </td>
+                                <td className={`py-4 px-6`}>
+                                    {elm.email}
+                                </td>
                                 <th scope="row" className={`py-4 px-6 font-medium text-gray-900 whitespace-nowrap`}>
-                                    {elm.userName}
+                                {elm.userStatus || 'User'}
                                 </th>
-                                <td className={`py-4 px-6`}>
-                                    {elm.name}
-                                </td>
-                                <td className={`py-4 px-6`}>
-                                    {elm.slot}
-                                </td>
                             </tr>     
                         })
                     }               
@@ -57,4 +59,4 @@ const Dashtable = ({data}) => {
     );
 };
 
-export default Dashtable;
+export default AlluserTable;
