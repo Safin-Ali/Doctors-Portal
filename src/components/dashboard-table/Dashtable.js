@@ -13,7 +13,7 @@ const Dashtable = ({data}) => {
                 <p>{format(currentDate,'PP')}</p>
             </div>
         </div>     
-        <div className={`overflow-x-auto relative shadow-md rounded-lg`}>
+        <div className={`relative shadow-md rounded-lg`}>
             <table className={`w-full text-sm text-left text-gray-500`}>
                 <thead className={`text-gray-700 uppercase bg-[#D0DEF2]`}>
                     <tr>

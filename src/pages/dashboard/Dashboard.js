@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Dashtable from '../../components/dashboard-table/Dashtable';
 import { AuthUser } from '../../context/AuthContext';
 import axios from 'axios';
 import SideNav from '../../components/side-nav/SideNav';
 import { BsArrowRightCircle } from 'react-icons/bs';
+import '../../components/side-nav/side-nav.css';
+
 
 const Dashboard = () => {
 
@@ -15,8 +17,6 @@ const Dashboard = () => {
     // side nav toggle
     const[toggleSideNav,setDriSNav] = useState(false);
 
-    console.log(toggleSideNav)
-
     const {data:apntedAppliedData = []} = useQuery({
         queryKey: ['apntedAppliedData',userData?.email],
         queryFn: async () =>{
@@ -26,18 +26,17 @@ const Dashboard = () => {
         }
     })
 
-
     return (
         <>
-            <section className={`grid overflow-y-scroll sm:grid-cols-4 lg:container gap-x-[3%] mx-auto`}>
-                <div>
+            <section className={`grid hide-scrollbar overflow-y-scroll lg:overflow-auto sm:grid-cols-5 gap-x-[3%]`}>
+                <div className={`col-span-1`}>
                     <SideNav setDriSNav={setDriSNav} toggleSideNav={toggleSideNav}></SideNav>
                 </div>
-                <div className={`col-span-3 ${toggleSideNav ? 'ml-[140px]' : 'ml-0'} p-5`}>
+                <div className={`col-span-4 ${toggleSideNav ? 'ml-[140px]' : 'ml-0'} p-5`}>
                     <Dashtable data={apntedAppliedData}></Dashtable>
                 </div>
             </section>
-            <div className={`fixed top-1/2  left-[1%] ${toggleSideNav ? 'hidden' : 'block'} transform -translate-y-1/2`}>
+            <div className={`fixed top-1/2  left-[1%] ${toggleSideNav ? 'hidden' : 'block'} transform -translate-y-1/2 lg:hidden`}>
                 <BsArrowRightCircle onClick={()=>setDriSNav(!toggleSideNav)} className={`text-2xl`}></BsArrowRightCircle>
             </div>
         </>
