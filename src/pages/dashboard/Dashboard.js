@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Dashtable from '../../components/dashboard-table/Dashtable';
 import { AuthUser } from '../../context/AuthContext';
 import axios from 'axios';
@@ -28,7 +28,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <section className={`grid hide-scrollbar overflow-y-scroll lg:overflow-auto sm:grid-cols-5 gap-x-[3%]`}>
+            <section className={`grid hide-scrollbar overflow-y-scroll md:overflow-auto md:grid-cols-5 gap-x-[3%]`}>
                 <div className={`col-span-1`}>
                     <SideNav setDriSNav={setDriSNav} toggleSideNav={toggleSideNav}></SideNav>
                 </div>
@@ -36,7 +36,7 @@ const Dashboard = () => {
                     <Dashtable data={apntedAppliedData}></Dashtable>
                 </div>
             </section>
-            <div className={`fixed top-1/2  left-[1%] ${toggleSideNav ? 'hidden' : 'block'} transform -translate-y-1/2 lg:hidden`}>
+            <div className={`fixed top-1/2  left-[1%] ${toggleSideNav ? 'hidden' : 'block'} transform -translate-y-1/2 md:hidden`}>
                 <BsArrowRightCircle onClick={()=>setDriSNav(!toggleSideNav)} className={`text-2xl`}></BsArrowRightCircle>
             </div>
         </>
