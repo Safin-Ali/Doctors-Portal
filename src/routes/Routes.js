@@ -14,7 +14,9 @@ const router = createBrowserRouter([
         {path: '/appoinment', element: <AppointmentPage></AppointmentPage>},
         {path: '/login', element: <Login></Login>},
         {path: '/signup', element: <Signup></Signup>},
-        {path: '/dashboard/myappointments', element: <PrivatePage><Dashboard></Dashboard></PrivatePage>},
+        {path: '/dashboard/myappointments/:email', loader:async ({params}) => fetch(`http://localhost:5000/dashboard/myappointments/${params.email}`,{
+            headers: {authorization: `Bearer ${localStorage.getItem('jwt-encrypt-key')}`}
+        }), element: <PrivatePage><Dashboard></Dashboard></PrivatePage>},
         {path: '/users', element: <PrivatePage><AllUsers></AllUsers></PrivatePage>},
     ]},
 ])

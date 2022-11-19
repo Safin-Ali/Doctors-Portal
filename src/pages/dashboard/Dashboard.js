@@ -6,6 +6,7 @@ import axios from 'axios';
 import SideNav from '../../components/side-nav/SideNav';
 import { BsArrowRightCircle } from 'react-icons/bs';
 import '../../components/side-nav/side-nav.css';
+import { useLoaderData } from 'react-router-dom';
 
 
 const Dashboard = () => {
@@ -17,14 +18,7 @@ const Dashboard = () => {
     // side nav toggle
     const[toggleSideNav,setDriSNav] = useState(false);
 
-    const {data:apntedAppliedData = []} = useQuery({
-        queryKey: ['apntedAppliedData',userData?.email],
-        queryFn: async () =>{
-            const res = await axios.get(`http://localhost:5000/dashboard/myappointments?email=${userData?.email}`,{headers: {authorization: `Bearer ${getJWTToken}`}});
-            const data = await res.data;
-            return data;
-        }
-    })
+    const apntedAppliedData = useLoaderData();
 
     return (
         <>
