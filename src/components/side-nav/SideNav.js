@@ -25,7 +25,7 @@ const SideNav = ({setDriSNav,toggleSideNav}) => {
 
                 <div className={`${toggleSideNav ? 'px-3' : 'px-0'} text-center`}>
                     <Link to={'/dashboard/myappointments'} className={`text-center text-[13px] md:text-base`}>My Appointment</Link>
-                    <Link to={'/users'} className={`my-10 ${activeUserData?.userStatus === 'admin' ? 'block' : 'hidden'} text-[13px] md:text-base`}>All Users</Link>
+                    <Link to={'/dashboard/users'} className={`my-10 ${activeUserData?.userStatus === 'admin' ? 'block' : 'hidden'} text-[13px] md:text-base`}>All Users</Link>
                 </div>
             </div>
     );
