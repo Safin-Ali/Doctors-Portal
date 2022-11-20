@@ -1,9 +1,29 @@
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import { format } from 'date-fns';
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { AuthUser } from '../../context/AuthContext';
+import CubeSpinner from '../cube-spinner/CubeSpinner';
 
-const Dashtable = ({data}) => {
+const Dashtable = () => {
 
     const currentDate = new Date();
+
+    const {userData} = useContext(AuthUser);
+
+    const [isLoading,setLoading] = useState(false)
+
+    const {data: apntedAppliedData,} = useQuery({
+        queryKey:['currentUserAppointments',userData?.email],
+        queryFn: () => axios.get(`http://localhost:5000/dashboard/myappointments?email=${userData?.email}`,{headers: {authorization: `Bearer ${localStorage.getItem('jwt-encrypt-key')}`}})
+        .then(res => {
+            setLoading(false);
+            return res.data
+        })
+        .catch(e => isLoading(true))
+    })
+
+    if(isLoading) return <CubeSpinner></CubeSpinner>
 
     return (
     <>     
@@ -33,7 +53,7 @@ const Dashtable = ({data}) => {
                 </thead>
                 <tbody className={`text-zinc-800`}>
                     {
-                        data.map((elm,idx) => {
+                        apntedAppliedData?.map((elm,idx) => {
                             return <tr key={elm._id} className={`bg-[#fffdfd] even:bg-[#f3f8fe] border-b`}>
                             <td className={`p-3 pl-4`}>
                                     {idx+1}

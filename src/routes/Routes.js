@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import Dashtable from "../components/dashboard-table/Dashtable";
 import Login from "../components/Form/Login";
 import Signup from "../components/Form/Signup";
 import AppointmentPage from "../pages/appointment/AppointmentPage";
@@ -14,9 +15,9 @@ const router = createBrowserRouter([
         {path: '/appoinment', element: <AppointmentPage></AppointmentPage>},
         {path: '/login', element: <Login></Login>},
         {path: '/signup', element: <Signup></Signup>},
-        {path: '/dashboard/myappointments/:email', loader:async ({params}) => fetch(`http://localhost:5000/dashboard/myappointments/${params.email}`,{
-            headers: {authorization: `Bearer ${localStorage.getItem('jwt-encrypt-key')}`}
-        }), element: <PrivatePage><Dashboard></Dashboard></PrivatePage>},
+        {path: '/dashboard/myappointments/',element: <PrivatePage><Dashboard></Dashboard></PrivatePage>,children:[
+            {path:'/dashboard/myappointments/',element:<Dashtable></Dashtable>}
+        ]},
         {path: '/users', element: <PrivatePage><AllUsers></AllUsers></PrivatePage>},
     ]},
 ])

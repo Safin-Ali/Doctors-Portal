@@ -37,7 +37,7 @@ const Navbar = () => {
                     <Link className={`block border-b mx-2 lg:border-0 text-black p-1.5 rounded-md hover:bg-slate-800 duration-150 hover:text-[#D4D9E3]`} to={`/`}>Home</Link>
                     <Link className={`block border-b mx-2 lg:border-0 text-black p-1.5 rounded-md hover:bg-slate-800 duration-150 hover:text-[#D4D9E3]`} to={`/`}>About</Link>
                     <Link className={`block border-b mx-2 lg:border-0 text-black p-1.5 rounded-md hover:bg-slate-800 duration-150 hover:text-[#D4D9E3]`} to={`/appoinment`}>Appoinments</Link>
-                    <Link className={`block border-b mx-2 lg:border-0 text-black p-1.5 rounded-md hover:bg-slate-800 duration-150 hover:text-[#D4D9E3]`} to={`/dashboard/myappointments/${userData?.email}`}>Dashboard</Link>
+                    <Link className={`block border-b mx-2 lg:border-0 text-black p-1.5 rounded-md hover:bg-slate-800 duration-150 hover:text-[#D4D9E3]`} to={`/dashboard/myappointments`}>Dashboard</Link>
                     <Link className={`block border-b mx-2 lg:border-0 text-black p-1.5 rounded-md hover:bg-slate-800 duration-150 hover:text-[#D4D9E3]`} to={`/`}>Contact Us</Link>
                     
                     {

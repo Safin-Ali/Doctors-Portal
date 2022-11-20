@@ -3,15 +3,13 @@ import Dashtable from '../../components/dashboard-table/Dashtable';
 import SideNav from '../../components/side-nav/SideNav';
 import { BsArrowRightCircle } from 'react-icons/bs';
 import '../../components/side-nav/side-nav.css';
-import { useLoaderData } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 
 const Dashboard = () => {
 
     // side nav toggle
     const[toggleSideNav,setDriSNav] = useState(false);
-
-    const apntedAppliedData = useLoaderData();
 
     return (
         <>
@@ -20,9 +18,7 @@ const Dashboard = () => {
                     <SideNav setDriSNav={setDriSNav} toggleSideNav={toggleSideNav}></SideNav>
                 </div>
                 <div className={`col-span-4 ${toggleSideNav ? 'ml-[140px]' : 'ml-0'} p-5`}>
-                    {
-                        apntedAppliedData ? <Dashtable data={apntedAppliedData}></Dashtable> : <p>nothing</p>
-                    }
+                    <Outlet></Outlet>
                 </div>
             </section>
             <div className={`fixed top-1/2 left-[1%] ${toggleSideNav ? 'hidden' : 'block'} transform -translate-y-1/2 md:hidden`}>
