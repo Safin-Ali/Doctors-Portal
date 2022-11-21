@@ -35,7 +35,15 @@ const SideNav = ({setDriSNav,toggleSideNav}) => {
 
                 <div className={`${toggleSideNav ? 'px-3' : 'px-0'} text-center`}>
                     <Link onClick={handleActiveNav} to={'/dashboard/myappointments'} className={` text-[13px] md:text-base side-nav text-[#19D3AE]`}>My Appointment</Link>
-                    <Link onClick={handleActiveNav} to={'/dashboard/users'} className={`my-10 ${activeUserData?.userStatus === 'admin' ? 'block' : 'hidden'} text-[13px] md:text-base side-nav`}>All Users</Link>
+                    {
+                        activeUserData?.userStatus && 
+                        (
+                            <>
+                                <Link onClick={handleActiveNav} to={'/dashboard/users'} className={`my-10 text-[13px] block md:text-base side-nav`}>All Users</Link>
+                                <Link onClick={handleActiveNav} state={'/dashboard/add/doctors'} to={'/dashboard/add/doctors'} className={`my-10 text-[13px] block md:text-base side-nav`}>Add Doctors</Link>
+                            </>
+                        )
+                    }
                 </div>
             </div>
     );

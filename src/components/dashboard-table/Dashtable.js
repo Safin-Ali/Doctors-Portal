@@ -28,7 +28,7 @@ const Dashtable = () => {
     return (
     <>     
         <div className={`flex flex-col md:flex-row justify-between items-center m-4`}>
-            <h1 className={`text-2xl order-2 my-1 md:order-none`}>My Appointment</h1>
+            <h1 className={`text-2xl order-2 my-1 md:order-none`}>My Appointments: {apntedAppliedData?.length}</h1>
             <div className={`border border-black order-1 p-3 rounded-lg my-1 md:order-none`}>
                 <p>{format(currentDate,'PP')}</p>
             </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SideNav from '../../components/side-nav/SideNav';
 import { BsArrowRightCircle } from 'react-icons/bs';
 import '../../components/side-nav/side-nav.css';
-import { Outlet, useLocation, useNavigate} from 'react-router-dom';
+import { Outlet} from 'react-router-dom';
 
 
 const Dashboard = () => {

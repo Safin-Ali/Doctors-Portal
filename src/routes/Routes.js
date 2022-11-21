@@ -1,11 +1,11 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter} from "react-router-dom";
 import AlluserTable from "../components/dashboard-table/AlluserTable";
 import Dashtable from "../components/dashboard-table/Dashtable";
+import AddDoctors from "../components/Form/AddDoctors";
 import Login from "../components/Form/Login";
 import Signup from "../components/Form/Signup";
 import PageNotFound404 from "../pages/404-Not-Found/PageNotFound404";
 import AppointmentPage from "../pages/appointment/AppointmentPage";
-import AllUsers from "../pages/dashboard/AllUsers";
 import Dashboard from "../pages/dashboard/Dashboard";
 import Home from "../pages/Home/Home";
 import Main from "../pages/Main/Main";
@@ -30,7 +30,9 @@ const router = createBrowserRouter([
 
             {path:'/dashboard/myappointments',element:<Dashtable></Dashtable>},
 
-            {path:'/dashboard/users',element:<AdminPage><AllUsers></AllUsers></AdminPage>},
+            {path:'/dashboard/users',element:<AdminPage><AlluserTable></AlluserTable></AdminPage>},
+
+            {path:'/dashboard/add/doctors',element:<AdminPage><AddDoctors></AddDoctors></AdminPage>},
 
         ]},
     ]},
