@@ -15,7 +15,7 @@ const AddDoctors = () => {
         axios.post(url,formData)
         .then(res => {
             if(res.data.success){
-                axios.post(`http://localhost:5000/doctors`,{doctorEmail,doctorName,speciality,doctorAvatar: `${res.data.data.url}`})
+                axios.post(`http://localhost:5000/doctors`,{doctorEmail,doctorName,speciality,doctorAvatar: `${res.data.data.url}`},{headers:{authorization: `Bearer ${localStorage.getItem('jwt-encrypt-key')}`}})
                 .then(res => console.log(res))
                 .catch(e => alert(e.message))
             }

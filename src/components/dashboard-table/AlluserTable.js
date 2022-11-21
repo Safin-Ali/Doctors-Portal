@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { format } from 'date-fns';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext,useState } from 'react';
 import { AuthUser } from '../../context/AuthContext';
 import CubeSpinner from '../cube-spinner/CubeSpinner';
 

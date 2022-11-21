@@ -11,7 +11,7 @@ const Dashtable = () => {
 
     const {userData} = useContext(AuthUser);
 
-    const [isLoading,setLoading] = useState(false)
+    const [isLoading,setLoading] = useState(false);
 
     const {data: apntedAppliedData,} = useQuery({
         queryKey:['currentUserAppointments',userData?.email],
