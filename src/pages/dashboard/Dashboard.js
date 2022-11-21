@@ -21,7 +21,7 @@ const Dashboard = () => {
                 </div>
             </section>
             <div className={`fixed top-1/2 left-[1%] ${toggleSideNav ? 'hidden' : 'block'} transform -translate-y-1/2 md:hidden`}>
-                <BsArrowRightCircle onClick={()=>setDriSNav(!toggleSideNav)} className={`text-2xl`}></BsArrowRightCircle>
+                <BsArrowRightCircle onClick={()=>setDriSNav(!toggleSideNav)} className={`text-2xl opacity-30 hover:opacity-100`}></BsArrowRightCircle>
             </div>
         </>
     );

@@ -1,4 +1,5 @@
 import { createBrowserRouter} from "react-router-dom";
+import AllDoctors from "../components/dashboard-table/AllDoctors";
 import AlluserTable from "../components/dashboard-table/AlluserTable";
 import Dashtable from "../components/dashboard-table/Dashtable";
 import AddDoctors from "../components/Form/AddDoctors";
@@ -33,6 +34,8 @@ const router = createBrowserRouter([
             {path:'/dashboard/users',element:<AdminPage><AlluserTable></AlluserTable></AdminPage>},
 
             {path:'/dashboard/add/doctors',element:<AdminPage><AddDoctors></AddDoctors></AdminPage>},
+
+            {path:'/dashboard/manage/doctors',element:<AdminPage><AllDoctors></AllDoctors></AdminPage>},
 
         ]},
     ]},

@@ -10,10 +10,16 @@ const AddDoctors = () => {
     // onSubmit Doctor Data
     function onSubmit ({doctorEmail,doctorName,speciality,doctorAvatar}) {
         const formData = new FormData();
-        formData.append('image',doctorAvatar[0])
+        formData.append('image',doctorAvatar[0]);
         const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMGBB_API}`
         axios.post(url,formData)
-        .then(res => console.log(res))
+        .then(res => {
+            if(res.data.success){
+                axios.post(`http://localhost:5000/doctors`,{doctorEmail,doctorName,speciality,doctorAvatar: `${res.data.data.url}`})
+                .then(res => console.log(res))
+                .catch(e => alert(e.message))
+            }
+        })
 
     }
 
@@ -23,7 +29,7 @@ const AddDoctors = () => {
 
             <h1 className={`text-2xl order-2 my-1 md:order-none`}>Add Doctors</h1>
 
-                <div className={`bg-white w-2/5 rounded-lg p-5`}>
+                <div className={`bg-white w-full md:w-2/3 lg:w-2/5 rounded-lg p-5`}>
                     <form onSubmit={handleSubmit(onSubmit)}>
 
                         {/* Doctor Name */}

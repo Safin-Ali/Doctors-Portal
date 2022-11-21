@@ -13,7 +13,7 @@ const SideNav = ({setDriSNav,toggleSideNav}) => {
         queryKey:['activeUserData',userData?.email],
         queryFn: () => axios.get(`http://localhost:5000/user/${userData?.email}`)
         .then(res => res.data)
-    })
+    });
     
     function handleActiveNav (e) {
         const event = e.target;
@@ -24,7 +24,7 @@ const SideNav = ({setDriSNav,toggleSideNav}) => {
             }
             event.classList.add('text-[#19D3AE]')
         }
-    }
+    };
     
     return (
             <div style={{transition: 'all 0.3s'}} className={`min-h-screen max-h-full z-[1] ${toggleSideNav ? 'w-[140px]' : 'w-0'} md:w-full fixed md:static h-full overflow-hidden border bg-white md:px-2`}>
@@ -34,13 +34,19 @@ const SideNav = ({setDriSNav,toggleSideNav}) => {
                 </div>
 
                 <div className={`${toggleSideNav ? 'px-3' : 'px-0'} text-center`}>
-                    <Link onClick={handleActiveNav} to={'/dashboard/myappointments'} className={` text-[13px] md:text-base side-nav text-[#19D3AE]`}>My Appointment</Link>
+                    {
+                        !activeUserData 
+                        && 
+                        <Link onClick={handleActiveNav} to={'/dashboard/myappointments'} className={` text-[13px] md:text-base side-nav text-[#19D3AE]`}>My Appointment</Link>
+                    }
+                    
                     {
                         activeUserData?.userStatus && 
                         (
                             <>
-                                <Link onClick={handleActiveNav} to={'/dashboard/users'} className={`my-10 text-[13px] block md:text-base side-nav`}>All Users</Link>
-                                <Link onClick={handleActiveNav} state={'/dashboard/add/doctors'} to={'/dashboard/add/doctors'} className={`my-10 text-[13px] block md:text-base side-nav`}>Add Doctors</Link>
+                                <Link onClick={handleActiveNav} to={'/dashboard/users'} className={`my-10 text-[13px] border rounded-md block md:text-base side-nav`}>All Users</Link>
+                                <Link onClick={handleActiveNav} state={'/dashboard/add/doctors'} to={'/dashboard/add/doctors'} className={`my-10 text-[13px] border rounded-md block md:text-base side-nav`}>Add Doctors</Link>
+                                <Link onClick={handleActiveNav} state={'/dashboard/manage/doctors'} to={'/dashboard/manage/doctors'} className={`my-10 text-[13px] border rounded-md block md:text-base side-nav`}>Manage Doctors</Link>
                             </>
                         )
                     }
