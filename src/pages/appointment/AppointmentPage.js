@@ -28,6 +28,7 @@ const AppointmentPage = () => {
     const [toggleModal,setToggleModal] = useState(false);
     const [modalDT,setModalDT] = useState();
     const [selTime,setSelTIme] = useState();
+    const[selDoller,setSelDoller] = useState();
 
     // get current trigged treatment date
     const[treatment,setTreatment] = useState();
@@ -40,9 +41,10 @@ const AppointmentPage = () => {
         const appointmentsDate = format(selectedDate,'PP');
         const name = treatment.name;
         const slot = selTime;
+        const price = selDoller;
         const userEmail = form.email.value;
         const userContactNumber = form.phoneNum.value || 'XXXXXXXXX';
-        const appoinmentObj = {userName,appointmentsDate,slot,userEmail,userContactNumber,name};
+        const appoinmentObj = {userName,appointmentsDate,slot,userEmail,userContactNumber,name,price};
 
         axios.post(`http://localhost:5000/booked/appointmentsData/?email=${userData?.email || ''}&date=${format(selectedDate,'PP')}`,appoinmentObj)
         .then(res => {
@@ -101,7 +103,7 @@ const AppointmentPage = () => {
                 <h4 className={`text-[#19D3AE] text-xl my-[5%] font-bold text-center`}>Available Appointments on {format(selectedDate,'PP')}</h4>
                 <div className={`grid grid-cols-1 text-center gap-x-[2%] md:grid-cols-2 md:gap-x-[10%] lg:grid-cols-3 `}>
                     {
-                        appointmentData?.map(elm => <AppointmentCard setTreatment={setTreatment} setSelTIme={setSelTIme} handleModal={handleModal} key={elm._id} data={elm}></AppointmentCard>)
+                        appointmentData?.map(elm => <AppointmentCard setSelDoller={setSelDoller} setTreatment={setTreatment} setSelTIme={setSelTIme} handleModal={handleModal} key={elm._id} data={elm}></AppointmentCard>)
                     }
                 </div>
             </section>

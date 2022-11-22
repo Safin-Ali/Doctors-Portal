@@ -1,8 +1,8 @@
 import React, { createRef } from 'react';
 
-const AppointmentCard = ({data,handleModal,setSelTIme,setTreatment}) => {
+const AppointmentCard = ({data,handleModal,setSelTIme,setTreatment,setSelDoller}) => {
 
-    const {name,slots} = data;
+    const {name,slots,price} = data;
 
     const defTime = createRef();
 
@@ -20,8 +20,12 @@ const AppointmentCard = ({data,handleModal,setSelTIme,setTreatment}) => {
             }
             <h4 className={`text-lg my-[5%] text-center`}>{slots.length} {slots.length > 0 ? 'Spaces' : 'Space' } Available</h4>
             <div className={`text-center`}>
+
+            <h4 className={`text-xl my-[5%] text-[#19D3AE] text-center`}>${price}</h4>
+
             <button onClick={()=>{
                 setSelTIme(defTime.current.value)
+                setSelDoller(price)
                 handleModal()
                 setTreatment(data)
                 }} className={`bg-gradient-to-l text-white p-2 rounded-lg bg-[#19D3AE] from-[#0FCFEC] hover:shadow-md hover:bg-[#0FCFEC] hover:from-[#19D3AE] duration-150`}>BOOK APPOINMENT</button>

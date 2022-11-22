@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import React, { useContext, useState } from 'react';
 import { AuthUser } from '../../context/AuthContext';
 import CubeSpinner from '../cube-spinner/CubeSpinner';
+import PaymentModal from '../Form/PaymentModal';
 
 const Dashtable = () => {
 
@@ -12,6 +13,10 @@ const Dashtable = () => {
     const {userData} = useContext(AuthUser);
 
     const [isLoading,setLoading] = useState(false);
+
+    const [paymentDT,sendPaymentDT] = useState(null);
+
+    const [modalBoo,setModalBoo] = useState(false);
 
     const {data: apntedAppliedData,} = useQuery({
         queryKey:['currentUserAppointments',userData?.email],
@@ -49,6 +54,9 @@ const Dashtable = () => {
                         <th scope="col" className={`py-3 px-6`}>
                             Time
                         </th>
+                        <th scope="col" className={`py-3 px-6`}>
+                            Payment
+                        </th>
                     </tr>
                 </thead>
                 <tbody className={`text-zinc-800`}>
@@ -67,12 +75,20 @@ const Dashtable = () => {
                                 <td className={`py-4 px-6`}>
                                     {elm.slot}
                                 </td>
+                                <td className={`py-4 px-6`}>
+                                    <button onClick={()=>{
+                                        sendPaymentDT(elm._id)
+                                        setModalBoo(!modalBoo)
+                                    }} className={`bg-gradient-to-l text-white p-2 rounded-lg bg-[#19D3AE] from-[#0FCFEC] hover:shadow-md hover:bg-[#0FCFEC] hover:from-[#19D3AE] duration-150`}>Pay</button>
+                                </td>
                             </tr>     
                         })
                     }               
                 </tbody>
             </table>
         </div>
+
+       { modalBoo && <PaymentModal id={paymentDT}></PaymentModal>}
     </>
     );
 };
